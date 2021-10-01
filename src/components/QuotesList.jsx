@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import QuotesListItem from './QuotesListItem';
 
-const QuotesList = ({ quotesListData }) => {
+const QuotesList = ({ quotesListData, removeItem}) => {
   if (!quotesListData.length) {
     return (
       <ContainerStyled>
@@ -14,7 +14,7 @@ const QuotesList = ({ quotesListData }) => {
     <ContainerStyled>
       <ListStyled>
         {quotesListData.map((quote) => (
-          <QuotesListItem quoteItem={quote} key={quote.id} />
+          <QuotesListItem quoteItem={quote} key={quote.id} removeItem={removeItem} />
         ))}
       </ListStyled>
     </ContainerStyled>

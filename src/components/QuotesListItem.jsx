@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import GetDataService from '../services/getData';
 
-const QuotesListItem = ({ quoteItem }) => {
+const QuotesListItem = ({ quoteItem, removeItem }) => {
   const [editable, setEditable] = useState(false);
   const [quoteValue, setQuoteValue] = useState(quoteItem.quote);
 
@@ -13,8 +13,8 @@ const QuotesListItem = ({ quoteItem }) => {
     setQuoteValue(evt.target.value);
   };
 
-  const handleRemoveQuote = () => {
-    _service.deleteQuote(quoteItem.id);
+  const handleRemoveQuote = (id) => {
+    _service.deleteQuote(quoteItem.id).then(() => removeItem(id));
   };
 
   return (

@@ -8,18 +8,21 @@ const QuotesContainer = () => {
   const _service = new GetDataService();
 
   useEffect(() => {
-    _service.getQuotes().then(({data}) => setData(data));
+    _service.getQuotes().then(({ data }) => setData(data));
   }, []);
 
   const getFormData = (formData) => {
-    console.log(data);
-    return setData([...data, formData])
+    return setData([...data, formData]);
+  };
+
+  const removeQuoteFromList = (formData) => {
+    return setData(data.filter((item) => item.id !== formData));
   };
 
   return (
     <>
       <QuotesForm getFormData={getFormData} />
-      <QuotesList quotesListData={data} />
+      <QuotesList quotesListData={data} removeItem={removeQuoteFromList} />
     </>
   );
 };
