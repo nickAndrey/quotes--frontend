@@ -1,22 +1,37 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
-const QuotesForm = () => (
-  <QuotesFormStyled>
-    <FormGroupStyled>
-      <label>Quote</label>
-      <InputStyled type='text' />
-    </FormGroupStyled>
+const QuotesForm = ({ getFormData }) => {
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
 
-    <FormGroupStyled>
-      <label>Author</label>
-      <InputStyled type='text' />
-    </FormGroupStyled>
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+  };
 
-    <FormGroupStyled>
-      <SubmitButtonStyled>Add</SubmitButtonStyled>
-    </FormGroupStyled>
-  </QuotesFormStyled>
-);
+  const pushNewElementToParent = () => {
+    const id = Math.random().toString(16).slice(2); // uniq id generator
+    getFormData({ id, quote, author, isEditable: false });
+  };
+
+  return (
+    <QuotesFormStyled onSubmit={handleSubmit}>
+      <FormGroupStyled>
+        <label>Quote</label>
+        <InputStyled type='text' onInput={(evt) => setQuote(evt.target.value)} />
+      </FormGroupStyled>
+
+      <FormGroupStyled>
+        <label>Author</label>
+        <InputStyled type='text' onInput={(evt) => setAuthor(evt.target.value)} />
+      </FormGroupStyled>
+
+      <FormGroupStyled>
+        <SubmitButtonStyled onClick={pushNewElementToParent}>Add</SubmitButtonStyled>
+      </FormGroupStyled>
+    </QuotesFormStyled>
+  );
+};
 
 const QuotesFormStyled = styled.form`
   display: flex;

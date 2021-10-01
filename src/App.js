@@ -1,12 +1,8 @@
 import './App.css';
-import QuotesForm from './components/QuotesForm';
+import Quotes from './components/Quotes';
 
 function App() {
-  return (
-    <>
-      <QuotesForm />
-    </>
-  );
+  return <Quotes />;
 }
 
 export default App;
