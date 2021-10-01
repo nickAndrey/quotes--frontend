@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import GetDataService from '../services/getData';
 
 const QuotesForm = ({ getFormData }) => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
 
+  const _service = new GetDataService();
+  const genId = () => Math.random().toString(16).slice(2); // uniq id generator
+
   const saveNewQuote = (evt) => {
     evt.preventDefault();
-
-    // TODO: request to server should be here.
+    _service.saveQuote({ id: genId(), quote, author, isEditable: false });
   };
 
   const pushNewElementToParent = () => {
-    const id = Math.random().toString(16).slice(2); // uniq id generator
-    getFormData({ id, quote, author, isEditable: false });
+    getFormData({ id: genId(), quote, author, isEditable: false });
   };
 
   return (

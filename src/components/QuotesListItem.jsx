@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import GetDataService from '../services/getData';
 
 const QuotesListItem = ({ quoteItem }) => {
   const [editable, setEditable] = useState(false);
   const [quoteValue, setQuoteValue] = useState(quoteItem.quote);
 
+  const _service = new GetDataService();
+
   const handleEditQuote = (evt) => {
-    // TODO: request to server should be here.
+    _service.updateQuote(quoteItem.id, { ...quoteItem, quote: evt.target.value });
     setQuoteValue(evt.target.value);
   };
 
   const handleRemoveQuote = () => {
-    // TODO: request to server should be here.
+    _service.deleteQuote(quoteItem.id);
   };
 
   return (
