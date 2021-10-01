@@ -1,7 +1,19 @@
 import styled from 'styled-components';
 import QuotesListItem from './QuotesListItem';
 
-const QuotesList = ({ quotesListData, removeItem}) => {
+const ContainerStyled = styled.section`
+  margin: auto;
+  padding: 0;
+  max-width: 400px;
+`;
+
+const ListStyled = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+`;
+
+const QuotesList = ({ quotesListData, removeItem }) => {
   if (!quotesListData.length) {
     return (
       <ContainerStyled>
@@ -20,17 +32,5 @@ const QuotesList = ({ quotesListData, removeItem}) => {
     </ContainerStyled>
   );
 };
-
-const ContainerStyled = styled.section`
-  margin: auto;
-  padding: 0;
-  max-width: 400px;
-`;
-
-const ListStyled = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-`;
 
 export default QuotesList;

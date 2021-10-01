@@ -1,5 +1,5 @@
 import './App.css';
-import QuotesContainer from './components/QuotesContainer';
+import QuotesContainer from './components/QuotesContainer/QuotesContainer';
 
 function App() {
   return <QuotesContainer />;

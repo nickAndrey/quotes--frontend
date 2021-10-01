@@ -1,6 +1,6 @@
-import fetchData from './fetcher';
+import fetchData from '../utills/fetcher';
 
-export default class GetDataService {
+export default class MongodbService {
   baseAPI = 'http://localhost:5000/api';
 
   saveQuote = (body) =>
