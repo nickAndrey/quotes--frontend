@@ -1,8 +1,8 @@
 import './App.css';
-import Quotes from './components/Quotes';
+import QuotesContainer from './components/QuotesContainer';
 
 function App() {
-  return <Quotes />;
+  return <QuotesContainer />;
 }
 
 export default App;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import QuotesForm from './QuotesForm';
 import QuotesList from './QuotesList';
 
-const Quotes = () => {
+const QuotesContainer = () => {
   const [data, setData] = useState([]);
 
   const getFormData = (formData) => setData([...data, formData]);
@@ -15,4 +15,4 @@ const Quotes = () => {
   );
 };
 
-export default Quotes;
+export default QuotesContainer;

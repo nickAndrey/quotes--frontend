@@ -3,18 +3,24 @@ import styled from 'styled-components';
 
 const QuotesListItem = ({ quoteItem }) => {
   const [editable, setEditable] = useState(false);
+  const [quoteValue, setQuoteValue] = useState(quoteItem.quote);
 
-  const handleEditQuote = () => {
-    // make request.
-  }
+  const handleEditQuote = (evt) => {
+    // TODO: request to server should be here.
+    setQuoteValue(evt.target.value);
+  };
+
+  const handleRemoveQuote = () => {
+    // TODO: request to server should be here.
+  };
 
   return (
     <ListItemStyed>
       {editable ? (
-        <input type='text' onChange={handleEditQuote} value={quoteItem.quote}/>
+        <InputStyled rows='1' onChange={handleEditQuote} value={quoteValue} />
       ) : (
         <span>
-          {quoteItem.quote}, <b>{quoteItem.author}</b>
+          {quoteValue}, <b>{quoteItem.author}</b>
         </span>
       )}
 
@@ -22,7 +28,9 @@ const QuotesListItem = ({ quoteItem }) => {
         <StyledButton type='button' onClick={() => setEditable(!editable)}>
           edit
         </StyledButton>
-        <StyledButton type='button'>delete</StyledButton>
+        <StyledButton type='button' onClick={() => handleRemoveQuote(quoteItem.id)}>
+          delete
+        </StyledButton>
       </div>
     </ListItemStyed>
   );
@@ -65,6 +73,13 @@ const StyledButton = styled.button`
   &:active {
     transform: scale(0.95);
   }
+`;
+
+const InputStyled = styled.textarea`
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #f0f0f0;
 `;
 
 export default QuotesListItem;

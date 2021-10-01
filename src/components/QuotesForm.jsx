@@ -5,8 +5,10 @@ const QuotesForm = ({ getFormData }) => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
 
-  const handleSubmit = (evt) => {
+  const saveNewQuote = (evt) => {
     evt.preventDefault();
+
+    // TODO: request to server should be here.
   };
 
   const pushNewElementToParent = () => {
@@ -15,7 +17,7 @@ const QuotesForm = ({ getFormData }) => {
   };
 
   return (
-    <QuotesFormStyled onSubmit={handleSubmit}>
+    <QuotesFormStyled onSubmit={saveNewQuote}>
       <FormGroupStyled>
         <label>Quote</label>
         <InputStyled type='text' onInput={(evt) => setQuote(evt.target.value)} />
