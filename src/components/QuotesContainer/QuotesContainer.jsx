@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import MongodbService from '../../services/MongodbService';
+import MongodbService from '../../services/mongodbService';
 import QuotesForm from './QuotesForm';
 import QuotesList from './QuotesList/QuotesList';
 

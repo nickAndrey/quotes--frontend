@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import MongodbService from '../../../services/MongodbService';
+import MongodbService from '../../../services/mongodbService';
 
 const ListItemStyed = styled.li`
   display: flex;
@@ -54,9 +54,15 @@ const QuotesListItem = ({ quoteItem, removeItem }) => {
 
   const _mongodbService = new MongodbService();
 
-  const handleEditQuote = (evt) => {
-    _mongodbService.updateQuote(quoteItem.id, { ...quoteItem, quote: evt.target.value });
-    setQuoteValue(evt.target.value);
+  const handleEditQuote = (evt) => setQuoteValue(evt.target.value);
+
+  const saveEditedQuote = (evt) => {
+    _mongodbService
+      .updateQuote(quoteItem.id, {
+        ...quoteItem,
+        quote: evt.target.value,
+      })
+      .then(() => setEditable(!editable));
   };
 
   const handleRemoveQuote = (id) => _mongodbService.deleteQuote(id).then(() => removeItem(id));
@@ -64,7 +70,12 @@ const QuotesListItem = ({ quoteItem, removeItem }) => {
   return (
     <ListItemStyed>
       {editable ? (
-        <TextareaStyled rows='1' onChange={handleEditQuote} value={quoteValue} />
+        <TextareaStyled
+          rows='1'
+          onChange={handleEditQuote}
+          onBlur={saveEditedQuote}
+          value={quoteValue}
+        />
       ) : (
         <span>
           {quoteValue}, <b>{quoteItem.author}</b>

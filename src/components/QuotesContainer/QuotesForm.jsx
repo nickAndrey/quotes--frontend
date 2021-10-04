@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import MongodbService from '../../services/MongodbService';
+import MongodbService from '../../services/mongodbService';
 
 const QuotesFormStyled = styled.form`
   display: flex;
