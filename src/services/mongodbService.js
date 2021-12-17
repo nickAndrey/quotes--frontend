@@ -1,7 +1,7 @@
 import fetchData from '../utills/fetcher';
 
 export default class MongodbService {
-  baseAPI = 'http://localhost:5000/api';
+  baseAPI = 'http://localhost:4300';
 
   saveQuote = (body) =>
     fetchData(`${this.baseAPI}/quotes`, {

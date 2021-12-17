@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import MongodbService from '../../services/mongodbService';
+import { v4 as uuidv4 } from 'uuid';
 
 const QuotesFormStyled = styled.form`
   display: flex;
@@ -47,13 +48,12 @@ const QuotesForm = ({ getFormData }) => {
   const [author, setAuthor] = useState('');
 
   const _mongodbService = new MongodbService();
-  const createNewId = () => new Date().valueOf(); // could be replaced with uuid package.
 
   const saveNewQuote = (evt) => {
     evt.preventDefault();
 
-    _mongodbService.saveQuote({ id: createNewId(), quote, author, isEditable: false }).then(() => {
-      getFormData({ id: createNewId(), quote, author, isEditable: false });
+    _mongodbService.saveQuote({ id: uuidv4(), quote, author, isEditable: false }).then(() => {
+      getFormData({ id: uuidv4(), quote, author, isEditable: false });
       setQuote('');
       setAuthor('');
     });
