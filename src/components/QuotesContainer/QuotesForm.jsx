@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MongodbService from '../../services/mongodbService';
 import { v4 as uuidv4 } from 'uuid';
@@ -46,18 +46,30 @@ const SubmitButtonStyled = styled.button`
 const QuotesForm = ({ getFormData }) => {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
+  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
   const _mongodbService = new MongodbService();
 
   const saveNewQuote = (evt) => {
     evt.preventDefault();
 
-    _mongodbService.saveQuote({ id: uuidv4(), quote, author, isEditable: false }).then(() => {
-      getFormData({ id: uuidv4(), quote, author, isEditable: false });
+    const quoteTransferObject = {
+      id: uuidv4(),
+      quote,
+      author,
+      isEditable: false,
+    };
+
+    _mongodbService.saveQuote(quoteTransferObject).then(() => {
+      getFormData(quoteTransferObject);
       setQuote('');
       setAuthor('');
     });
   };
+
+  useEffect(() => {
+    setSubmitButtonDisabled(!quote.length || !author.length);
+  }, [quote, author]);
 
   return (
     <QuotesFormStyled onSubmit={saveNewQuote}>
@@ -72,7 +84,9 @@ const QuotesForm = ({ getFormData }) => {
       </FormGroupStyled>
 
       <FormGroupStyled>
-        <SubmitButtonStyled type='subbmit'>Add</SubmitButtonStyled>
+        <SubmitButtonStyled type='subbmit' disabled={isSubmitButtonDisabled}>
+          Add
+        </SubmitButtonStyled>
       </FormGroupStyled>
     </QuotesFormStyled>
   );
