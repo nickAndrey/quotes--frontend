@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import MongodbService from '../../../services/mongodbService';
+import APIService from '../../../services/apiService';
 
 const ListItemStyed = styled.li`
   display: flex;
@@ -52,12 +52,12 @@ const QuotesListItem = ({ quoteItem, removeItem }) => {
   const [editable, setEditable] = useState(false);
   const [quoteValue, setQuoteValue] = useState(quoteItem.quote);
 
-  const _mongodbService = new MongodbService();
+  const _apiService = new APIService();
 
   const handleEditQuote = (evt) => setQuoteValue(evt.target.value);
 
   const saveEditedQuote = (evt) => {
-    _mongodbService
+    _apiService
       .updateQuote(quoteItem.id, {
         ...quoteItem,
         quote: evt.target.value,
@@ -65,7 +65,7 @@ const QuotesListItem = ({ quoteItem, removeItem }) => {
       .then(() => setEditable(!editable));
   };
 
-  const handleRemoveQuote = (id) => _mongodbService.deleteQuote(id).then(() => removeItem(id));
+  const handleRemoveQuote = (id) => _apiService.deleteQuote(id).then(() => removeItem(id));
 
   return (
     <ListItemStyed>

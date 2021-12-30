@@ -1,16 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
-import MongodbService from '../../services/mongodbService';
+import APIService from '../../services/apiService';
 import QuotesForm from './QuotesForm';
 import QuotesList from './QuotesList/QuotesList';
 
 const QuotesContainer = () => {
   const [quotesList, setQuotesList] = useState([]);
 
-  const _mongodbService = useMemo(() => new MongodbService(), []);
+  const _apiService = useMemo(() => new APIService(), []);
 
   useEffect(() => {
-    _mongodbService.getQuotes().then(({ results }) => setQuotesList(results));
-  }, [_mongodbService]);
+    _apiService.getQuotes().then(({ results }) => setQuotesList(results));
+  }, [_apiService]);
 
   const getFormData = (formData) => setQuotesList([...quotesList, formData]);
 

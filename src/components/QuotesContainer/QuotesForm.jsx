@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import MongodbService from '../../services/mongodbService';
+import APIService from '../../services/apiService';
 import { v4 as uuidv4 } from 'uuid';
 
 const QuotesFormStyled = styled.form`
@@ -48,7 +48,7 @@ const QuotesForm = ({ getFormData }) => {
   const [author, setAuthor] = useState('');
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
-  const _mongodbService = new MongodbService();
+  const _apiService = new APIService();
 
   const saveNewQuote = (evt) => {
     evt.preventDefault();
@@ -60,7 +60,7 @@ const QuotesForm = ({ getFormData }) => {
       isEditable: false,
     };
 
-    _mongodbService.saveQuote(quoteTransferObject).then(() => {
+    _apiService.saveQuote(quoteTransferObject).then(() => {
       getFormData(quoteTransferObject);
       setQuote('');
       setAuthor('');
